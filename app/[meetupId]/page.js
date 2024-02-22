@@ -1,17 +1,23 @@
-import { Fragment } from "react";
-import classes from './page.module.css';
+import MeetUpDetails from "@/components/meetups/MeetUpDetails";
 
-function MeetUpDetails() {
-    return (
-        <Fragment>
-            <section className={classes.detail}>
-                <img src="https://www.pexels.com/photo/turned-on-imac-beside-macbook-on-table-39284/" alt="A first meetup" />
-                <h1>A First meetup</h1>
-                <address>some street 5, some city</address>
-                <p>The meetup description</p>
-            </section>
-        </Fragment>
-    );
+function MeetUpDetailsPage() {
+    return <MeetUpDetails meetup={props.meetup} />;
 }
 
-export default MeetUpDetails;
+export async function getStaticPaths() {
+    const paths = meetupsData.map((meetup) => ({ params: { id: meetup.id } }));
+    return { paths, fallback: false };
+}
+
+export async function getStaticProps(context) {
+    const meetupId = context.params.id;
+    const meetup = meetupsData.find((meetup) => meetup.id === meetupId);
+
+    return {
+        props: {
+            meetup,
+        },
+    };
+}
+
+export default MeetUpDetailsPage;
