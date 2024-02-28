@@ -1,7 +1,7 @@
 import MeetUpDetails from "@/components/meetups/MeetUpDetails";
 
 function MeetUpDetailsPage() {
-    return <MeetUpDetails meetup={props.meetup} />;
+    return <MeetUpDetails />;
 }
 
 export async function getStaticPaths() {
